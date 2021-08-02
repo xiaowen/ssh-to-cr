@@ -28,7 +28,7 @@ deploy-gke:
 	kubectl create deployment ssh-server --image=gcr.io/${PROJECT_ID}/ssh-server
 
 shell:
-	docker run --rm -it -v ${HOME}/.ssh:/app/.ssh -p 8022:8022 gcr.io/${PROJECT_ID}/ssh-client
+	docker run --rm -it -v ${HOME}/.ssh:/app/.ssh -p 8022:8022 -p 8080:8080 gcr.io/${PROJECT_ID}/ssh-client
 
 shell-gke:
 	kubectl exec -it $$(kubectl get pods -l=app=ssh-server -o jsonpath='{.items[*].metadata.name}') -- /bin/bash

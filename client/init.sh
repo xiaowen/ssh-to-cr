@@ -14,4 +14,4 @@ done
 echo "Envoy is ready"
 
 echo "Starting SSH client ..."
-ssh appuser@localhost -p 8022
+ssh -L 0.0.0.0:8080:localhost:8080 appuser@localhost -p 8022
