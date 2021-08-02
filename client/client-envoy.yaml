@@ -1,6 +1,6 @@
 static_resources:
   listeners:
-  - name: listener_0
+  - name: listener_ssh
     address:
       socket_address:
         protocol: TCP
@@ -16,6 +16,10 @@ static_resources:
           tunneling_config:
             hostname: CLOUD_RUN_SERVICE_HOSTNAME:443
             use_post: true
+            headers_to_add:
+            - header:
+                key: "X-ENVOY-FORWARD"
+                value: "ssh"
 
   clusters:
   - name: cluster_0

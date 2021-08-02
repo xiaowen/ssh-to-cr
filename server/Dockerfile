@@ -2,8 +2,9 @@ FROM envoyproxy/envoy:v1.18.2 AS envoy-base
 
 FROM debian:8 AS debian
 RUN apt-get update \
-    && apt-get -y install bash netcat openssh-server sudo telnet vim \
+    && apt-get -y install bash netcat openssh-server python3 sudo telnet vim \
     && apt-get clean \
+    && update-alternatives --install /usr/bin/python python /usr/bin/python3 1 \
     && printf '%%appuser ALL=(ALL:ALL) NOPASSWD:ALL\n' > /etc/sudoers.d/appuser
 
 WORKDIR /app

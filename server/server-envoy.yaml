@@ -24,20 +24,26 @@ static_resources:
                   headers:
                   - name: ":method"
                     exact_match: "POST"
+                  - name: "X-ENVOY-FORWARD"
+                    exact_match: "ssh"
                 route:
                   timeout: 0s
-                  cluster: cluster_0
+                  cluster: cluster_ssh
                   upgrade_configs:
                   - upgrade_type: CONNECT
                     connect_config:
                       allow_post: true
+              - match:
+                  prefix: "/"
+                route:
+                  cluster: cluster_web
           http_filters:
           - name: envoy.filters.http.router
           http2_protocol_options:
             allow_connect: true
 
   clusters:
-  - name: cluster_0
+  - name: cluster_ssh
     connect_timeout: 5s
     typed_extension_protocol_options:
       envoy.extensions.upstreams.http.v3.HttpProtocolOptions:
@@ -46,7 +52,7 @@ static_resources:
           http2_protocol_options:
             allow_connect: true
     load_assignment:
-      cluster_name: cluster_0
+      cluster_name: cluster_ssh
       endpoints:
       - lb_endpoints:
         - endpoint:
@@ -54,3 +60,17 @@ static_resources:
               socket_address:
                 address: 127.0.0.1
                 port_value: 22
+
+  - name: cluster_web
+    connect_timeout: 5s
+    type: STRICT_DNS
+    lb_policy: ROUND_ROBIN
+    load_assignment:
+      cluster_name: cluster_web
+      endpoints:
+      - lb_endpoints:
+        - endpoint:
+            address:
+              socket_address:
+                address: 127.0.0.1
+                port_value: 8080

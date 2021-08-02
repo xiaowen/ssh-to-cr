@@ -4,4 +4,7 @@ echo "Starting SSH server ..."
 service ssh start
 
 echo "Starting Envoy ..."
-/app/envoy -c /etc/envoy/server-envoy.yaml
+/app/envoy -c /etc/envoy/server-envoy.yaml &
+
+echo "Starting web server"
+python3 -m http.server --bind 0.0.0.0 8080
