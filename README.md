@@ -7,3 +7,4 @@ Some ideas borrowed from:
 Known issues:
 * ctrl-c doesn't work in the ssh session
 * sudo doesn't work in the ssh session
+* Tested on both a Macbook and a Linux Google Compute Engine VM as clients.  On the GCE VM, had to rebuild the container image on that VM to get it working.
