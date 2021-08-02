@@ -3,3 +3,7 @@ Some ideas borrowed from:
 * https://github.com/costinm/krun/tree/main/samples/cloudrun
 * https://www.envoyproxy.io/docs/envoy/latest/intro/arch_overview/http/upgrades#tunneling-tcp-over-http
 * https://stackoverflow.com/questions/65897760/how-to-disable-route-timeout-in-envoy
+
+Known issues:
+* ctrl-c doesn't work in the ssh session
+* sudo doesn't work in the ssh session
