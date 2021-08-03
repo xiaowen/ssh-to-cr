@@ -12,7 +12,7 @@ docker-client:
 	#docker push gcr.io/${PROJECT_ID}/ssh-client
 
 deploy:
-	gcloud beta run deploy ssh-server \
+	gcloud alpha run deploy ssh-server \
 	    --image gcr.io/${PROJECT_ID}/ssh-server \
 	    --region ${REGION} \
 	    --allow-unauthenticated \
@@ -21,6 +21,7 @@ deploy:
 	    --timeout=3600 \
 	    --min-instances=1 \
 	    --max-instances=1 \
+	    --sandbox=minivm \
 	    --project ${PROJECT_ID}
 
 deploy-gke:
