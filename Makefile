@@ -1,6 +1,6 @@
-PROJECT_ID=tensile-howl-307302
-REGION=us-central1
-SERVICE_HOSTNAME=ssh-server-yhp4zujfia-uc.a.run.app
+PROJECT_ID?=tensile-howl-307302
+REGION?=us-central1
+SERVICE_HOSTNAME?=ssh-server-yhp4zujfia-uc.a.run.app
 
 docker-server:
 	cp ${HOME}/.ssh/authorized_keys server/
